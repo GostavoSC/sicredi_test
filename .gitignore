@@ -1,0 +1,13 @@
+/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/CJ5eZ40Yjn_GBwDM+z5i0rQI21Y=
+/app/build/intermediates/*
+/app/build/temp/
+/app/build/tmp/kotlin-classes/
+/app/build/kotlin/
+/.gradle/
+/app/build/outputs/
+/app/build/tmp/compileDebugAndroidTestJavaWithJavac/
+/app/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin
+/.idea
+/app/build/generated/source/buildConfig/androidTest/debug/gstv/sicredi/test/BuildConfig.java
+/gradlew.bat
+/gradlew

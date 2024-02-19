@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Sicredi Test</string>
+    <string name="error_not_authorized">Não autorizado</string>
+</resources>
