@@ -5,6 +5,7 @@ import gstv.sicredi.domain.Event
 import gstv.sicredi.source.remote.EventResponse
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class EventResponseMapper : Mapper<EventResponse, Event> {
     override fun map(from: EventResponse) = Event(
@@ -21,8 +22,8 @@ class EventResponseMapper : Mapper<EventResponse, Event> {
 
 private fun Long.convertToDate(): String {
     try {
-        val sdf = SimpleDateFormat("MM/dd/yyyy")
-        val netDate = Date(this * 1000)
+        val sdf = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+        val netDate = Date(this)
         return sdf.format(netDate)
     } catch (e: Exception) {
         return e.toString()
