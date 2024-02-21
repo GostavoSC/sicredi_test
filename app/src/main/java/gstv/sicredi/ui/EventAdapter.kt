@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import gstv.sicredi.databinding.CardViewItemBinding
 import gstv.sicredi.domain.Event
 
-class EventAdapter() : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
+class EventAdapter(private val clickListener: OnCardClickListener) :
+    RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
     var events: List<Event> = emptyList()
         set(value) {
@@ -20,7 +21,10 @@ class EventAdapter() : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            onCardClicked = {
+                clickListener.clicked(it)
+            }
         )
     }
 
@@ -30,13 +34,25 @@ class EventAdapter() : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = events.size
 
-    class ViewHolder(private val binding: CardViewItemBinding) :
+    class ViewHolder(
+        private val binding: CardViewItemBinding,
+        private val onCardClicked: (Int) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(event: Event) {
-            binding.txtTitle.text = event.title
-            binding.txtDate.text = event.date
+            with(binding) {
+                txtTitle.text = event.title
+                txtDate.text = event.date
+                eventCard.setOnClickListener {
+                    onCardClicked.invoke(absoluteAdapterPosition)
+                }
+            }
         }
 
     }
 
+}
+
+interface OnCardClickListener {
+    fun clicked(position: Int)
 }

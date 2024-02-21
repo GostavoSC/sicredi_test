@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/home_fragment">
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="gstv.sicredi.ui.HomeFragment"
+        android:label="Note List"
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_mobile_navigation_to_details_fragment"
+            app:destination="@id/details_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/details_fragment"
+        android:name="gstv.sicredi.ui.DetailsFragment"
+        android:label="Details"
+        tools:layout="@layout/details_fragment" >
+        <action
+            android:id="@+id/action_addNoteFragment_to_home_fragment"
+            app:destination="@id/home_fragment" />
+    </fragment>
+</navigation>

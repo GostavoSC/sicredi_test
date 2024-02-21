@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Sicredi" parent="android:Theme.Light.NoTitleBar">
+    <style name="Theme.Sicredi" parent="Theme.AppCompat.Light.NoActionBar">
 
     </style>
 
