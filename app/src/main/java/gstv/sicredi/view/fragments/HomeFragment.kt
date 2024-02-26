@@ -1,14 +1,19 @@
-package gstv.sicredi.ui
+package gstv.sicredi.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import gstv.sicredi.R
+import gstv.sicredi.core.utils.showErrorDialog
 import gstv.sicredi.databinding.HomeFragmentBinding
-import gstv.sicredi.presentation.view_model.HomeViewModel
+import gstv.sicredi.view.adapters.EventAdapter
+import gstv.sicredi.view.MainActivity
+import gstv.sicredi.view.adapters.OnCardClickListener
+import gstv.sicredi.view_model.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -34,19 +39,30 @@ class HomeFragment : Fragment() {
     private fun setupLayout() {
         binding.recyclerView.adapter = EventAdapter(
             object : OnCardClickListener {
-                override fun clicked(position: Int) {
-
-
+                override fun clicked(id: String) {
+                    val args = Bundle()
+                    args.putString(DetailsFragment.EVENT_ID, id)
+                    findNavController()
+                        .navigate(R.id.action_home_navigation_to_details_fragment, args)
                 }
             }
         )
         binding.recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        (requireActivity() as MainActivity).showToolbar()
     }
 
     private fun setupObservers() {
-        viewModel.getAllEvents()
-        viewModel.eventsList.observe(viewLifecycleOwner) {
-            (binding.recyclerView.adapter as EventAdapter).events = it
+        with(viewModel){
+            getAllEvents()
+            eventsList.observe(viewLifecycleOwner) {
+                binding.progressBar.visibility = View.GONE
+                (binding.recyclerView.adapter as EventAdapter).events = it
+            }
+
+            onError.observe(viewLifecycleOwner){
+                showErrorDialog(it)
+            }
         }
+
     }
 }

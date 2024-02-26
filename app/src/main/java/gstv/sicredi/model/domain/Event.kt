@@ -1,4 +1,4 @@
-package gstv.sicredi.domain
+package gstv.sicredi.model.domain
 
 data class Event(
     val id: String,

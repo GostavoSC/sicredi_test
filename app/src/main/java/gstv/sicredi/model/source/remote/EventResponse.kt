@@ -1,4 +1,4 @@
-package gstv.sicredi.source.remote
+package gstv.sicredi.model.source.remote
 
 import com.google.gson.annotations.SerializedName
 

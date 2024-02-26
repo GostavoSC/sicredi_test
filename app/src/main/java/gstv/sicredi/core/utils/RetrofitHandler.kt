@@ -34,7 +34,7 @@ fun Throwable.toResultError() = when (val exception = this) {
 private fun HttpException.toGenericError(): ResultWrapper.GenericError? {
     val errorMessage = response().extractError()
 
-    return if (errorMessage != null && errorMessage.isNotBlank()) ResultWrapper.GenericError(
+    return if (!errorMessage.isNullOrBlank()) ResultWrapper.GenericError(
         code(),
         errorMessage
     )
@@ -53,7 +53,7 @@ private fun <T> Response<T>?.extractError(): String? {
             else -> result.toString()
         }
     } catch (e: JSONException) {
-        Log.e("WMS", "A request error occurred")
+        Log.e("API", "A request error occurred")
         errorBody.string()
     }
 }

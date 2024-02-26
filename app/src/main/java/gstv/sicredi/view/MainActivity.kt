@@ -1,10 +1,10 @@
-package gstv.sicredi
+package gstv.sicredi.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.security.ProviderInstaller
 import gstv.sicredi.databinding.MainActivityBinding
-import gstv.sicredi.ui.HomeFragment
 
 class MainActivity : FragmentActivity() {
 
@@ -14,10 +14,13 @@ class MainActivity : FragmentActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ProviderInstaller.installIfNeeded(this)
-        setupLayout()
     }
 
-    private fun setupLayout() {
+    fun showToolbar() {
+        binding.toolbar.visibility = View.VISIBLE
+    }
 
+    fun hideToolbar() {
+        binding.toolbar.visibility = View.GONE
     }
 }

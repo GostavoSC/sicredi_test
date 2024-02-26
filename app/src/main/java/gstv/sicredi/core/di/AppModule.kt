@@ -3,11 +3,12 @@ package gstv.sicredi.core.di
 
 import gstv.sicredi.core.utils.BASE_URL
 import gstv.sicredi.core.utils.SSLPinning
-import gstv.sicredi.presentation.view_model.HomeViewModel
-import gstv.sicredi.service.EventsService
-import gstv.sicredi.source.EventsRepository
-import gstv.sicredi.source.EventsRepositoryImpl
-import gstv.sicredi.source.remote.mapper.EventResponseMapper
+import gstv.sicredi.view_model.DetailsViewModel
+import gstv.sicredi.view_model.HomeViewModel
+import gstv.sicredi.model.service.EventsService
+import gstv.sicredi.model.source.EventsRepository
+import gstv.sicredi.model.source.EventsRepositoryImpl
+import gstv.sicredi.model.source.remote.mapper.EventResponseMapper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -23,6 +24,7 @@ val appModule = module {
         EventsRepositoryImpl(getMapperOf(), get())
     }
     viewModel { HomeViewModel(get()) }
+    viewModel { DetailsViewModel(get()) }
 }
 
 val retrofitModule = module {

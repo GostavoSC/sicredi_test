@@ -6,20 +6,20 @@
     app:startDestination="@id/home_fragment">
     <fragment
         android:id="@+id/home_fragment"
-        android:name="gstv.sicredi.ui.HomeFragment"
+        android:name="gstv.sicredi.view.fragments.HomeFragment"
         android:label="Note List"
         tools:layout="@layout/home_fragment">
         <action
-            android:id="@+id/action_mobile_navigation_to_details_fragment"
+            android:id="@+id/action_home_navigation_to_details_fragment"
             app:destination="@id/details_fragment" />
     </fragment>
     <fragment
         android:id="@+id/details_fragment"
-        android:name="gstv.sicredi.ui.DetailsFragment"
+        android:name="gstv.sicredi.view.fragments.DetailsFragment"
         android:label="Details"
         tools:layout="@layout/details_fragment" >
         <action
-            android:id="@+id/action_addNoteFragment_to_home_fragment"
+            android:id="@+id/action_details_to_home_fragment"
             app:destination="@id/home_fragment" />
     </fragment>
 </navigation>

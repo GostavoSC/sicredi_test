@@ -1,18 +1,19 @@
-package gstv.sicredi
+package gstv.sicredi.view
 
 import android.app.Application
 import android.content.Context
+import androidx.multidex.MultiDexApplication
 import gstv.sicredi.core.di.appModule
 import gstv.sicredi.core.di.retrofitModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class AppApplication : Application() {
+class EventApplication : MultiDexApplication() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         startKoin {
-            androidContext(this@AppApplication)
+            androidContext(this@EventApplication)
             modules(appModule, retrofitModule)
         }
     }

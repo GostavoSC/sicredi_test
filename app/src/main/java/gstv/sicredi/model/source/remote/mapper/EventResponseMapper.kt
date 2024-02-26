@@ -1,8 +1,8 @@
-package gstv.sicredi.source.remote.mapper
+package gstv.sicredi.model.source.remote.mapper
 
 import gstv.sicredi.core.utils.Mapper
-import gstv.sicredi.domain.Event
-import gstv.sicredi.source.remote.EventResponse
+import gstv.sicredi.model.domain.Event
+import gstv.sicredi.model.source.remote.EventResponse
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
