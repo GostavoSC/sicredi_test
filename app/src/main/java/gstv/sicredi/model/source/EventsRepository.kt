@@ -6,5 +6,5 @@ import gstv.sicredi.model.domain.Event
 interface EventsRepository {
     suspend fun getAllEvents(): ResultWrapper<List<Event>>
     suspend fun getEventDetails(id: String): ResultWrapper<Event>
-    suspend fun sendCheckIn(): ResultWrapper<Unit>
+    suspend fun sendCheckIn(id: String): ResultWrapper<Unit>
 }

@@ -6,6 +6,7 @@ import gstv.sicredi.core.utils.mapWith
 import gstv.sicredi.core.utils.safeApiCall
 import gstv.sicredi.model.domain.Event
 import gstv.sicredi.model.service.EventsService
+import gstv.sicredi.model.source.remote.CheckInRequestBody
 import gstv.sicredi.model.source.remote.EventResponse
 
 class EventsRepositoryImpl(
@@ -21,8 +22,8 @@ class EventsRepositoryImpl(
         service.getEventDetails(id).mapWith(eventsResponseMapper)
     }
 
-    override suspend fun sendCheckIn(): ResultWrapper<Unit> = safeApiCall {
-        service.sendCheckIn()
+    override suspend fun sendCheckIn(id: String): ResultWrapper<Unit> = safeApiCall {
+        service.sendCheckIn(CheckInRequestBody(eventId = id))
     }
 
 }

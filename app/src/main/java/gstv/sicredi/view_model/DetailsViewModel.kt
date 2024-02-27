@@ -17,22 +17,21 @@ class DetailsViewModel(private val repository: EventsRepository) : ViewModel() {
     private val _onCheckInDone: MutableLiveData<Unit> = MutableLiveData()
     val onCheckInDone: LiveData<Unit> = _onCheckInDone
 
-    private val _onError: MutableLiveData<String?> = MutableLiveData()
-    val onError: LiveData<String?> = _onError
+    private val _onError: MutableLiveData<ResultWrapper<*>> = MutableLiveData()
+    val onError: LiveData<ResultWrapper<*>> = _onError
+
+    private var eventId: String = ""
 
     fun fetchDetails(eventId: String) {
+        this.eventId = eventId
         viewModelScope.launch {
             when (val result = repository.getEventDetails(eventId)) {
                 is ResultWrapper.Success -> {
                     _eventDetails.postValue(result.value)
                 }
 
-                is ResultWrapper.GenericError -> {
-                    _onError.postValue(result.error)
-                }
-
                 else -> {
-                    _onError.postValue(null)
+                    _onError.postValue(result)
                 }
             }
         }
@@ -40,17 +39,18 @@ class DetailsViewModel(private val repository: EventsRepository) : ViewModel() {
 
     fun sendCheckIn() {
         viewModelScope.launch {
-            when (val result = repository.sendCheckIn()) {
+            if (eventId.isEmpty()) {
+                _onError.postValue(ResultWrapper.GenericError())
+                return@launch
+            }
+
+            when (val result = repository.sendCheckIn(eventId)) {
                 is ResultWrapper.Success -> {
                     _onCheckInDone.postValue(Unit)
                 }
 
-                is ResultWrapper.GenericError -> {
-                    _onError.postValue(result.error)
-                }
-
                 else -> {
-                    _onError.postValue(null)
+                    _onError.postValue(result)
                 }
             }
         }

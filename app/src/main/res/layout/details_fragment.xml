@@ -10,13 +10,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="@color/white"
+                app:title="@string/event_details"
+                app:titleTextColor="@color/white" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+
         <ImageView
             android:id="@+id/image_event"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/event_title"
@@ -31,6 +55,17 @@
             app:layout_constraintTop_toBottomOf="@id/image_event"
             tools:text="Title" />
 
+        <TextView
+            android:id="@+id/event_price"
+            style="@style/subtitleBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/green"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/event_title"
+            tools:text="R$20,00" />
+
         <ImageView
             android:id="@+id/ic_share"
             android:layout_width="40dp"
@@ -38,18 +73,19 @@
             android:src="@drawable/ic_share"
             app:layout_constraintBottom_toBottomOf="@id/event_title"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@id/event_title" />
+            app:layout_constraintStart_toEndOf="@id/event_title"
+            app:layout_constraintTop_toTopOf="@id/event_title" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/event_description"
+            style="@style/subtitleNormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
             android:layout_marginVertical="12dp"
-            style="@style/subtitleNormal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/event_title"
+            app:layout_constraintTop_toBottomOf="@id/event_price"
             tools:text="Description" />
 
         <com.google.android.material.button.MaterialButton
@@ -66,14 +102,14 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/event_localization"
+            style="@style/subtitleBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
             android:layout_marginVertical="12dp"
-            tools:text="Local"
-            style="@style/subtitleBold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/event_description" />
+            app:layout_constraintTop_toBottomOf="@id/event_description"
+            tools:text="Local" />
 
         <ProgressBar
             android:id="@+id/progress_bar"

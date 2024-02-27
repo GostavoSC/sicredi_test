@@ -14,8 +14,8 @@ class HomeViewModel(private val repository: EventsRepository) : ViewModel() {
     private val _eventsList: MutableLiveData<List<Event>> = MutableLiveData()
     val eventsList: LiveData<List<Event>> = _eventsList
 
-    private val _onError: MutableLiveData<String?> = MutableLiveData()
-    val onError: LiveData<String?> = _onError
+    private val _onError: MutableLiveData<ResultWrapper<*>> = MutableLiveData()
+    val onError: LiveData<ResultWrapper<*>> = _onError
 
     fun getAllEvents() {
         viewModelScope.launch {
@@ -24,12 +24,8 @@ class HomeViewModel(private val repository: EventsRepository) : ViewModel() {
                     _eventsList.postValue(result.value)
                 }
 
-                is ResultWrapper.GenericError -> {
-                    _onError.postValue(result.error)
-                }
-
                 else -> {
-                    _onError.postValue(null)
+                    _onError.postValue(result)
                 }
             }
         }

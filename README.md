@@ -13,14 +13,14 @@ Aproveitei este projeto para utilizar e aumentar meu conhecimento com a arquitet
 
 ## Testes
 Para os testes utilizei o Mockk para retornos da Api nos testes unitários.
-Já nos testes de tela utilizei o Espresso mesmo.
+Já nos testes de tela utilizei o Espresso.
 
   * Escolhi os dois por ja ter um conhecimento com eles no passado e ter essa facilidade de utilização.
 
 ## Considerações Finais
 
 Esse projeto foi um verdadeiro desafio, pensei que como seria um projeto simples, seria super tranquilo de fazer,
-mas enfreitei alguns desafios pelo fato de conseguir dar suporte para o sdk 19 ate o atual.
+mas enfreitei alguns desafios pelo fato de conseguir dar suporte para o sdk 19 até o atual, e fico super contente por conseguir finalizar e entregar algo limpo e testado podendo ser utilizado em versões menores de android.
 
 
 Fico a disposição para qualquer dúvida!

@@ -7,7 +7,7 @@ data class Event(
     val imageUrl: String?,
     val longitude: Float,
     val latitude: Float,
-    val price: Float,
+    val price: String,
     val title: String?,
 //  val people: List<*>  Api returning a empty list to see and use here
 )

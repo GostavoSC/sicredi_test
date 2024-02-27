@@ -9,4 +9,5 @@
     <string name="warning">Atenção</string>
     <string name="checkin_done">Check-in realizado com sucesso!</string>
     <string name="address_mask">%1$s - %2$s - %3$s, %4$s %5$s</string>
+    <string name="connection_problemn">Estamos com problemas na conexão, tente novamente mais tarde!</string>
 </resources>

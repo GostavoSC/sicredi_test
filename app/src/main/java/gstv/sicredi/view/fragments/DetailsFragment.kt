@@ -2,7 +2,6 @@ package gstv.sicredi.view.fragments
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +15,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.android.material.snackbar.Snackbar
 import gstv.sicredi.R
+import gstv.sicredi.core.utils.getAddressLocalization
 import gstv.sicredi.core.utils.shareEventWithOthers
 import gstv.sicredi.core.utils.showErrorDialog
 import gstv.sicredi.databinding.DetailsFragmentBinding
@@ -47,8 +47,12 @@ class DetailsFragment : Fragment() {
     }
 
     private fun setupLayout() {
-        binding.checkinButton.setOnClickListener{
+        binding.checkinButton.setOnClickListener {
             viewModel.sendCheckIn()
+        }
+
+        binding.toolbar.setNavigationOnClickListener {
+            parentFragmentManager.popBackStack()
         }
     }
 
@@ -76,30 +80,17 @@ class DetailsFragment : Fragment() {
     }
 
     private fun updateLayout(event: Event) {
+        val address = requireActivity().getAddressLocalization(event.latitude, event.longitude)
         with(binding) {
             progressBar.visibility = View.GONE
             eventTitle.text = event.title
             eventDescription.text = event.description
-            val address = Geocoder(requireActivity()).getFromLocation(
-                event.latitude.toDouble(),
-                event.longitude.toDouble(),
-                1
-            )?.first()
-
-            address?.let {
-                "${it.adminArea} - ${it.subAdminArea} - ${it.subLocality} , ${it.thoroughfare} ${it.subThoroughfare}"
-                eventLocalization.text = getString(
-                    R.string.address_mask,
-                    it.adminArea,
-                    it.subAdminArea,
-                    it.subLocality,
-                    it.thoroughfare,
-                    it.subThoroughfare
-                )
-            }
+            eventPrice.text = event.price
+            if (!address.isNullOrEmpty())
+                eventLocalization.text = address
 
             icShare.setOnClickListener {
-                requireActivity().shareEventWithOthers(event)
+                requireActivity().shareEventWithOthers(event, address)
             }
 
             Glide.with(requireActivity())

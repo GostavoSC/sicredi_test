@@ -3,6 +3,7 @@ package gstv.sicredi.model.source.remote.mapper
 import gstv.sicredi.core.utils.Mapper
 import gstv.sicredi.model.domain.Event
 import gstv.sicredi.model.source.remote.EventResponse
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -15,7 +16,7 @@ class EventResponseMapper : Mapper<EventResponse, Event> {
         imageUrl = from.imageUrl,
         longitude = from.longitude,
         latitude = from.latitude,
-        price = from.price,
+        price = from.price.convertToMoney(),
         title = from.title
     )
 }
@@ -28,4 +29,10 @@ private fun Long.convertToDate(): String {
     } catch (e: Exception) {
         return e.toString()
     }
+}
+
+private fun Float.convertToMoney(): String {
+    val ptBr = Locale("pt", "BR")
+    val price: String = NumberFormat.getCurrencyInstance(ptBr).format(this)
+    return price
 }

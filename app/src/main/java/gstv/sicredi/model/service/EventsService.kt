@@ -15,6 +15,6 @@ interface EventsService {
     suspend fun getEventDetails(@Path("eventId") eventId: String): EventResponse
 
     @POST("checkin")
-    suspend fun sendCheckIn(@Body body: CheckInRequestBody = CheckInRequestBody())
+    suspend fun sendCheckIn(@Body body: CheckInRequestBody )
 
 }
